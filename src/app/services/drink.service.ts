@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import {map, Observable} from "rxjs";
 import {Drink} from "../interfaces/cocktails";
 
@@ -7,7 +7,7 @@ import {Drink} from "../interfaces/cocktails";
   providedIn: 'root'
 })
 export class DrinkService {
-  private apiUrl = 'https://cocktail--mania-88df6dba9ed5.herokuapp.com/drinks'; // Replace apiUrl with this: https://www.thecocktaildb.com/api/json/v1/1/search.php? if using just angular, and no node
+  private apiUrl = 'http://localhost:3000/drinks'; // Replace apiUrl with this: https://www.thecocktaildb.com/api/json/v1/1/search.php? if using just angular, and no node
 
   constructor(private http: HttpClient) {
   }
