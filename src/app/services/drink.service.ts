@@ -1,24 +1,22 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { map, Observable } from 'rxjs';
-import { Drink } from '../interfaces/cocktails';
+import {map, Observable} from "rxjs";
+import {Drink} from "../interfaces/cocktails";
 
 @Injectable({
   providedIn: 'root'
 })
 export class DrinkService {
-  private apiUrl = 'https://cocktail--mania-88df6dba9ed5.herokuapp.com/drinks'; // Replace with your Heroku backend URL
+  private apiUrl = 'https://www.thecocktaildb.com/api/json/v1/1/search.php?'; // Replace apiUrl with this: https://www.thecocktaildb.com/api/json/v1/1/search.php? if using just angular, and no node
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+  }
 
   queryData(searchTerm: string): Observable<Drink[]> {
-    const headers = new HttpHeaders({
-      'Content-Type': 'application/json'
-    });
-
-    const url = `${this.apiUrl}?search=${encodeURIComponent(searchTerm)}`;
-    return this.http.get<any>(url, { headers }).pipe(
+    const url = `${this.apiUrl}?search=${encodeURIComponent(searchTerm)}`; //Replace ?search=${encodeURIComponent(searchTerm)} with ${this.apiUrl}s=${searchTerm} if using just angular
+    return this.http.get<any[]>(url).pipe(
       map((response: any) => {
+        // Parse and map the API response to the Drink interface
         return response.drinks.map((drink: any) => {
           return {
             strDrink: drink.strDrink,
